@@ -1,27 +1,23 @@
 FROM node:20-alpine
-
 WORKDIR /app
 
-# Copy package files
+# Install deps
 COPY package*.json ./
-
-# Install dependencies
 RUN npm install
 
-# Copy source code
+# Copy source & build
 COPY . .
-
-# Build the application
 RUN npm run build
 
-# Create data directory
-RUN mkdir -p /app/calendar-data
+# Create creds directory for OAuth JSON
+RUN mkdir -p /app/.gmail-mcp \
+ && chown -R node:node /app/.gmail-mcp
 
-# Set permissions for the data directory
-RUN chown -R node:node /app/calendar-data
-
-# Switch to non-root user
+# Run as non-root
 USER node
 
-# Start the server
-CMD ["node", "build/index.js"]
+# Expose HTTP/SSE port
+EXPOSE 3000
+
+# Launch the MCP server
+CMD ["node","dist/index.js"]

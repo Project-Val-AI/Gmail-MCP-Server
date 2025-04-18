@@ -26,6 +26,5 @@ Thumbs.db
 
 # Project specific
 gcp-oauth.keys.json
-.calendar-mcp/
+.gmail-mcp/
 credentials.json
-.calendar-server-credentials.json 

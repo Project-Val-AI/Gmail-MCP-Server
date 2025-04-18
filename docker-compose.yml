@@ -11,5 +11,20 @@ services:
     command: redis-server --appendonly yes
     restart: always
 
+  gmail-mcp:
+    build: .
+    container_name: gmail-mcp
+    ports:
+      - "3000:3000"
+    volumes:
+      - mcp-gmail:/app/.gmail-mcp
+    environment:
+      - GMAIL_OAUTH_PATH=/app/.gmail-mcp/gcp-oauth.keys.json
+      - GMAIL_CREDENTIALS_PATH=/app/.gmail-mcp/credentials.json
+    restart: unless-stopped
+    depends_on:
+      - redis
+
 volumes:
-  redis_data: 
+  redis_data:
+  mcp-gmail:

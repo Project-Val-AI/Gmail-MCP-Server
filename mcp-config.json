@@ -1,10 +1,7 @@
 {
   "mcpServers": {
-    "gmail": {
-      "command": "node",
-      "args": [
-        "D:\\BackDataService\\Gmail-MCP-Server\\dist\\index.js"
-      ]
+    "my‑gmail": {
+      "url": "http://localhost:3000/sse"
     }
   }
 }
